@@ -1,0 +1,50 @@
+//多文件的tasks.json
+
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "type": "shell",
+            "command": "gcc", //写c++换成g++
+            "args": [
+                "${fileDirname}\\*.c", //写c++把 *.c 换成 *.cpp，linux下改为对应的路径
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe",//linux下改为对应的路径，并把后缀名改为.out
+                "-g",
+                "-Wall", 
+                "-static-libgcc",   
+                "-fexec-charset=GBK",
+                "-std=c11",  //写c++换成c++标准
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "new"
+            },
+            "problemMatcher": "$gcc"
+        },
+        {
+            "label": "run",
+            "type": "shell",
+            "dependsOn": "build",
+            "command": "${fileDirname}\\${fileBasenameNoExtension}.exe",//linux下改为对应的路径并把后缀名改为.out
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": true,
+                "panel": "new"
+            }
+        }
+
+    ]
+}
